@@ -1,6 +1,7 @@
 .width30{
     width:30%;
 }
+
 .float_right{
     float:  right !important;
 }
@@ -11,4 +12,29 @@
 .card_title_center{
     width: 100%;
     text-align: center !important;
+}
+.custom_thead{
+    background-color: #1fa977;
+    color: #fff;
+}
+table .btn{ margin-top: 2px;}
+.custom_form{
+    border: 1px solid lightgray;
+    border-radius: 7px;
+    padding: 10px;
+    background-color:white;
+    margin-bottom: 7px;
+}
+h4.modal-title {
+    text-align: center;
+    width: 100%;
+}
+
+.modal {
+   
+    overflow: scroll;
+
+}
+.customh3{
+    font-size: 18px; text-align: center;color: brown
 }

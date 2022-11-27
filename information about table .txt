@@ -1,0 +1,5 @@
+** Sales and Inverntory System **
+- Admin Table 
+- Admin Pannel Setting
+- User Table 
+- Treasury Table => للمحاسبين المداومين ع الشفت 

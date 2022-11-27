@@ -1,7 +1,7 @@
 @extends('layouts.admin-layout')
 
 @section('name')
-    Home Page - Sales Project
+Sales and Inverntory System
 @endsection
 
 @section('breadcrumb')
@@ -9,12 +9,12 @@
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-6">
-          <h1 class="m-0 text-dark">Starter Page</h1>
+          <h1 class="m-0 text-dark">Sales and Inverntory System</h1>
         </div><!-- /.col -->
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
             <li class="breadcrumb-item"><a href="#">Home</a></li>
-            <li class="breadcrumb-item active">Starter Page</li>
+            <li class="breadcrumb-item active">Sales and Inverntory System</li>
           </ol>
         </div><!-- /.col -->
       </div><!-- /.row -->
