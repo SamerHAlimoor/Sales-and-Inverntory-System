@@ -119,7 +119,7 @@
               </a>
               <ul class="nav nav-treeview">
                  <li class="nav-item">
-                    <a href="" class="nav-link {{ (request()->is('admin/sales_matrial_types*') )?'active':'' }}">
+                    <a href="{{route('admin.sales_material_types.index')}}" class="nav-link {{ (request()->is('admin/sales_matrial_types*') )?'active':'' }}">
                        *
                        <p>
                           بيانات فئات الفواتير 
