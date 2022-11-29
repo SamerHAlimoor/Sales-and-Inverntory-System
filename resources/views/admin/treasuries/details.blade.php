@@ -121,7 +121,7 @@ Treasury Page
           </table>
      <!--  treasuries_delivery   -->
      <div class="card-header">
-        <h3 class="card-title card_title_center">الخزن الفرعية التي سوف تسلم عهدتها الي الخزنة ( {{ $data['name'] }} )  
+        <h3 class="card-title card_title_center">الخزن الفرعية التي سوف تُسلم عهدتها الي الخزنة ( {{ $data['name'] }} )  
         
             <a href="{{ route('admin.treasuries.Add_treasuries_delivery',$data['id']) }}" class="btn btn-sm btn-primary">اضافة جديد</a>
 
