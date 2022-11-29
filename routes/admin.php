@@ -2,9 +2,12 @@
 
 use App\Http\Controllers\Admin\AdminSettingPanelController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\InventoryUomController;
+use App\Http\Controllers\Admin\InventoryUomsContorller;
 use App\Http\Controllers\Admin\LoginController;
 use App\Http\Controllers\Admin\SalesMaterialType;
 use App\Http\Controllers\Admin\SalesMaterialTypeController;
+use App\Http\Controllers\Admin\StoresController;
 use App\Http\Controllers\Admin\TreasuriesController;
 use App\Models\Admin;
 use App\Models\AdminPannelSetting;
@@ -51,6 +54,24 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function () {
     Route::post('/sales-material-types/update/{id}', [SalesMaterialTypeController::class, 'update'])->name('admin.sales_material_types.update');
     Route::get('/sales-material-types/delete/{id}', [SalesMaterialTypeController::class, 'delete'])->name('admin.sales_material_types.delete');
     /*           end sales_material_types                */
+
+    /*         start stores                */
+    Route::get('/stores/index', [StoresController::class, 'index'])->name('admin.stores.index');
+    Route::get('/stores/create', [StoresController::class, 'create'])->name('admin.stores.create');
+    Route::post('/stores/store', [StoresController::class, 'store'])->name('admin.stores.store');
+    Route::get('/stores/edit/{id}', [StoresController::class, 'edit'])->name('admin.stores.edit');
+    Route::post('/stores/update/{id}', [StoresController::class, 'update'])->name('admin.stores.update');
+    Route::get('/stores/delete/{id}', [StoresController::class, 'delete'])->name('admin.stores.delete');
+    /*           end stores                */
+    /*         start  Uom Units               */
+    Route::get('/uoms/index', [InventoryUomController::class, 'index'])->name('admin.uoms.index');
+    Route::get('/uoms/create', [InventoryUomController::class, 'create'])->name('admin.uoms.create');
+    Route::post('/uoms/store', [InventoryUomController::class, 'store'])->name('admin.uoms.store');
+    Route::get('/uoms/edit/{id}', [InventoryUomController::class, 'edit'])->name('admin.uoms.edit');
+    Route::post('/uoms/update/{id}', [InventoryUomController::class, 'update'])->name('admin.uoms.update');
+    Route::get('/uoms/delete/{id}', [InventoryUomController::class, 'delete'])->name('admin.uoms.delete');
+    Route::post('/uoms/ajax_search', [InventoryUomController::class, 'ajax_search'])->name('admin.uoms.ajax_search');
+    /*           end Units                */
 });
 
 Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'middleware' => 'guest:admin'], function () {
