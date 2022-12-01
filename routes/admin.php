@@ -2,15 +2,14 @@
 
 use App\Http\Controllers\Admin\AdminSettingPanelController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\InventoryItemCartContorller;
+use App\Http\Controllers\Admin\InventoryItemCartController;
+use App\Http\Controllers\Admin\InventoryItemCategoryController;
 use App\Http\Controllers\Admin\InventoryUomController;
-use App\Http\Controllers\Admin\InventoryUomsContorller;
 use App\Http\Controllers\Admin\LoginController;
-use App\Http\Controllers\Admin\SalesMaterialType;
 use App\Http\Controllers\Admin\SalesMaterialTypeController;
 use App\Http\Controllers\Admin\StoresController;
 use App\Http\Controllers\Admin\TreasuriesController;
-use App\Models\Admin;
-use App\Models\AdminPannelSetting;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -72,6 +71,18 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function () {
     Route::get('/uoms/delete/{id}', [InventoryUomController::class, 'delete'])->name('admin.uoms.delete');
     Route::post('/uoms/ajax_search', [InventoryUomController::class, 'ajax_search'])->name('admin.uoms.ajax_search');
     /*           end Units                */
+
+    /*         start  inv item card categories */
+    Route::resource('/inv-item-card-categories', InventoryItemCategoryController::class);
+    Route::get('/inv-item-card-categories/delete/{id}', [InventoryItemCategoryController::class, 'delete'])->name('inv-item-card-categories.delete');
+
+    /*         End inv item card categories
+
+    /*         start  inv item card  */
+    Route::get('/inv-item-card/delete/{id}', [InventoryItemCartController::class, 'delete'])->name('inv-item-card.delete');
+    Route::resource('/inv-item-card', InventoryItemCartController::class);
+    /*         End inv item card 
+*/
 });
 
 Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'middleware' => 'guest:admin'], function () {

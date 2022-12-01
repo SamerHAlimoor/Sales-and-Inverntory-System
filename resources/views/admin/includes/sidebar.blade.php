@@ -143,7 +143,7 @@
                     </a>
                  </li>
                  <li class="nav-item">
-                    <a href="" class="nav-link {{ (request()->is('admin/inv_itemcard_categories*') )?'active':'' }}">
+                    <a href="{{route('inv-item-card-categories.index')}}" class="nav-link {{ (request()->is('admin/inv-item-card-categories') )?'active':'' }}">
                        *
                        <p>
                           فئات الاصناف         
@@ -151,7 +151,7 @@
                     </a>
                  </li>
                  <li class="nav-item">
-                    <a href="" class="nav-link {{ (request()->is('admin/itemcard*') )?'active':'' }}">
+                    <a href="{{route('inv-item-card.index')}}" class="nav-link {{ (request()->is('admin/inv-item-card') )?'active':'' }}">
                        *
                        <p>
                           الاصناف         
