@@ -3,3 +3,12 @@
 - Admin Pannel Setting
 - User Table 
 - Treasury Table => للمحاسبين المداومين ع الشفت 
+- treasuries_deliveries =>   تسليم الخزنات سواء لنفسها او للخزنة الرئيسية
+-  sales_material_types => فئة المبيعات او نوعهم ايش
+-  stores =>   اسم المخزن اللي مخزن فيه هاي المنتجات
+- Uoms => نوع الوحدات اما وحدة تجزئة او وحدة رئيسية
+               Every class of unit they have two type 
+             - وحدة تجزئة 
+             -  وحدة رئيسية
+                -----------------
+- inv_item_card

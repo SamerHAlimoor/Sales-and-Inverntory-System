@@ -109,8 +109,8 @@
                  </li>
               </ul>
            </li>
-           <li class="nav-item has-treeview {{ ((request()->is('admin/sales_matrial_types*')||request()->is('admin/stores*') ||request()->is('admin/uoms*') ||request()->is('admin/inv_itemcard_categories*')||request()->is('admin/itemcard*'))and !request()->is('admin/itemcardBalance*') )?'menu-open':'' }}     ">
-              <a href="#" class="nav-link {{ ((request()->is('admin/sales_matrial_types*')||request()->is('admin/stores*') ||request()->is('admin/uoms*') ||request()->is('admin/inv_itemcard_categories*')||request()->is('admin/itemcard*')  ) and !request()->is('admin/itemcardBalance*')  )?'active':'' }}">
+           <li class="nav-item has-treeview {{ ((request()->is('admin/sales_material_types*')||request()->is('admin/stores*') ||request()->is('admin/uoms*') ||request()->is('admin/inv_itemcard_categories*')||request()->is('admin/itemcard*'))and !request()->is('admin/itemcardBalance*') )?'menu-open':'' }}     ">
+              <a href="#" class="nav-link {{ ((request()->is('admin/sales_material_types*')||request()->is('admin/stores*') ||request()->is('admin/uoms*') ||request()->is('admin/inv_itemcard_categories*')||request()->is('admin/itemcard*')  ) and !request()->is('admin/itemcardBalance*')  )?'active':'' }}">
                  <i class="nav-icon fas fa-tachometer-alt"></i>
                  <p>
                     ضبط المخازن
@@ -119,7 +119,7 @@
               </a>
               <ul class="nav nav-treeview">
                  <li class="nav-item">
-                    <a href="{{route('admin.sales_material_types.index')}}" class="nav-link {{ (request()->is('admin/sales_matrial_types*') )?'active':'' }}">
+                    <a href="{{route('admin.sales_material_types.index')}}" class="nav-link {{ (request()->is('admin/sales-material-types*') )?'active':'' }}">
                        *
                        <p>
                           بيانات فئات الفواتير 
@@ -127,7 +127,7 @@
                     </a>
                  </li>
                  <li class="nav-item">
-                    <a href="" class="nav-link {{ (request()->is('admin/stores*') )?'active':'' }}">
+                    <a href="{{route('admin.stores.index')}}" class="nav-link {{ (request()->is('admin/stores*') )?'active':'' }}">
                        *
                        <p>
                           بيانات المخازن         
@@ -135,7 +135,7 @@
                     </a>
                  </li>
                  <li class="nav-item">
-                    <a href="" class="nav-link {{ (request()->is('admin/uoms*') )?'active':'' }}">
+                    <a href="{{route('admin.uoms.index')}}" class="nav-link {{ (request()->is('admin/uoms*') )?'active':'' }}">
                        *
                        <p>
                           بيانات الوحدات         
@@ -143,7 +143,7 @@
                     </a>
                  </li>
                  <li class="nav-item">
-                    <a href="" class="nav-link {{ (request()->is('admin/inv_itemcard_categories*') )?'active':'' }}">
+                    <a href="{{route('inv-item-card-categories.index')}}" class="nav-link {{ (request()->is('admin/inv-item-card-categories') )?'active':'' }}">
                        *
                        <p>
                           فئات الاصناف         
@@ -151,7 +151,7 @@
                     </a>
                  </li>
                  <li class="nav-item">
-                    <a href="" class="nav-link {{ (request()->is('admin/itemcard*') )?'active':'' }}">
+                    <a href="{{route('inv-item-card.index')}}" class="nav-link {{ (request()->is('admin/inv-item-card') )?'active':'' }}">
                        *
                        <p>
                           الاصناف         
