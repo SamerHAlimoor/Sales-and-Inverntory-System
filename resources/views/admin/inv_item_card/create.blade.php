@@ -75,7 +75,7 @@
       <option value="">اختر الفئة</option>
       @if (@isset($inv_itemcard_categories) && !@empty($inv_itemcard_categories))
      @foreach ($inv_itemcard_categories as $info )
-       <option @if(old('inv_itemcard_categories')==$info->id) selected="selected" @endif value="{{ $info->id }}"> {{ $info->name }} </option>
+       <option @if(old('inv_item_card_categories_id')==$info->id) selected="selected" @endif value="{{ $info->id }}"> {{ $info->name }} </option>
      @endforeach
       @endif
     </select>
@@ -87,15 +87,15 @@
   <div class="col-md-6"> 
     <div class="form-group"> 
       <label>   الصنف الاب له</label>
-      <select name="parent_inv_item_card_id" id="parent_inv_item_card_id" class="form-control ">
+      <select name="inv_item_card_categories_id" id="inv_item_card_categories_id" class="form-control ">
         <option selected value="0"> هو اب</option>
         @if (@isset($item_card_data) && !@empty($item_card_data))
        @foreach ($item_card_data as $info )
-         <option @if(old('parent_inv_item_card_id')==$info->id) selected="selected" @endif value="{{ $info->id }}"> {{ $info->name }} </option>
+         <option @if(old('item_card_data')==$info->id) selected="selected" @endif value="{{ $info->id }}"> {{ $info->name }} </option>
        @endforeach
         @endif
       </select>
-      @error('parent_inv_item_card_id')
+      @error('inv_item_card_categories_id')
       <span class="text-danger">{{ $message }}</span>
       @enderror
       </div>
@@ -261,8 +261,8 @@
         <label>  حالة التفعيل</label>
         <select name="active" id="active" class="form-control">
          <option value="">اختر الحالة</option>
-        <option   @if(old('active')==1) selected="selected"  @endif value="1"> نعم</option>
-         <option @if(old('active')==0 and old('active')!="" ) selected="selected"   @endif value="0"> لا</option>
+        <option   @if(old('active')==0) selected="selected"  @endif value="0"> نعم</option>
+         <option @if(old('active')==1 and old('active')!="" ) selected="selected"   @endif value="1"> لا</option>
         </select>
         @error('active')
         <span class="text-danger">{{ $message }}</span>

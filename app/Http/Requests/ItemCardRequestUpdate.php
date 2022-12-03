@@ -19,18 +19,18 @@ class ItemCardRequestUpdate extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required',
-            'inv_item_card_categories_id' => 'required',
-            'price' => 'required',
-            'nos_bulk_price' => 'required',
-            'bulk_price' => 'required',
-            'cost_price' => 'required',
-            'price_retail' => 'required_if:does_has_retail_unit,1',
-            'nos_bulk_price_retail' => 'required_if:does_has_retail_unit,1',
-            'bulk_price_retail' => 'required_if:does_has_retail_unit,1',
-            'cost_price_retail' => 'required_if:does_has_retail_unit,1',
-            'has_fixed_price' => 'required',
-            'active' => 'required',
+            'name' => 'sometimes',
+            'inv_item_card_categories_id' => 'sometimes',
+            'price' => 'sometimes',
+            'nos_bulk_price' => 'sometimes',
+            'bulk_price' => 'sometimes',
+            'cost_price' => 'sometimes',
+            'price_retail' => 'sometimes',
+            'nos_bulk_price_retail' => 'sometimes',
+            'bulk_price_retail' => 'sometimes',
+            'cost_price_retail' => 'sometimes',
+            'has_fixed_price' => 'sometimes',
+            'active' => 'sometimes',
 
         ];
     }

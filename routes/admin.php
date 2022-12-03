@@ -23,7 +23,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-define('PAGINATION_COUNT', 10);
+const PAGINATION_COUNT = 10;
 
 
 Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function () {
@@ -79,8 +79,11 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function () {
     /*         End inv item card categories
 
     /*         start  inv item card  */
+    Route::resource('/inv-item-card', InventoryItemCartController::class)->except(['update']);
+    Route::post('/inv-item-card/update/{id}', [InventoryItemCartController::class, 'update'])->name('inv-item-card.update');
     Route::get('/inv-item-card/delete/{id}', [InventoryItemCartController::class, 'delete'])->name('inv-item-card.delete');
-    Route::resource('/inv-item-card', InventoryItemCartController::class);
+    Route::post('/inv-item-card/ajax_search', [InventoryItemCartController::class, 'ajax_search'])->name('admin.inv-item-card.ajax_search');
+
     /*         End inv item card 
 */
 });

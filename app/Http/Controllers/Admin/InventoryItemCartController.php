@@ -16,7 +16,7 @@ class InventoryItemCartController extends Controller
     public function index()
     {
         $com_code = auth()->user()->com_code;
-        $data = get_cols_where_p(new InventoryItemCart(), array("*"), array("com_code" => $com_code), 'id', 'DESC', PAGINATION_COUNT);
+        $data = get_cols_where_p(new InventoryItemCart(), array("*"), array("com_code" => $com_code), 'id', 'ASC', PAGINATION_COUNT);
         // dd($data);
         if (!empty($data)) {
             foreach ($data as $info) {
@@ -29,8 +29,8 @@ class InventoryItemCartController extends Controller
                 }
             }
         }
-        $inv_itemcard_categories = get_cols_where(new InventoryItemCategory(), array('id', 'name'), array('com_code' => $com_code, 'active' => 0), 'id', 'DESC');
-        return view('admin.inv_item_card.index', ['data' => $data, 'inv_itemcard_categories' => $inv_itemcard_categories]);
+        $inv_item_card_categories = get_cols_where(new InventoryItemCategory(), array('id', 'name'), array('com_code' => $com_code, 'active' => 0), 'id', 'DESC');
+        return view('admin.inv_item_card.index', ['data' => $data, 'inv_item_card_categories' => $inv_item_card_categories]);
     }
     public function create()
     {
@@ -39,7 +39,7 @@ class InventoryItemCartController extends Controller
         $inv_uoms_parent = get_cols_where(new InvUoms(), array('id', 'name'), array('com_code' => $com_code, 'active' => 0, 'is_master' => 1), 'id', 'DESC');
         $inv_uoms_child = get_cols_where(new InvUoms(), array('id', 'name'), array('com_code' => $com_code, 'active' => 0, 'is_master' => 0), 'id', 'DESC');
         $item_card_data = get_cols_where(new InventoryItemCart(), array('id', 'name'), array('com_code' => $com_code, 'active' => 0), 'id', 'DESC');
-        //return $inv_itemcard_categories;
+        //return $item_card_data;
         return view('admin.inv_item_card.create', ['inv_itemcard_categories' => $inv_itemcard_categories, 'inv_uoms_parent' => $inv_uoms_parent, 'inv_uoms_child' => $inv_uoms_child, 'item_card_data' => $item_card_data]);
     }
     public function store(ItemCardRequest $request)
@@ -108,6 +108,7 @@ class InventoryItemCartController extends Controller
             $data_insert['created_at'] = date("Y-m-d H:i:s");
             $data_insert['date'] = date("Y-m-d");
             $data_insert['com_code'] = $com_code;
+            // return $data_insert;
             InventoryItemCart::create($data_insert);
             return redirect()->route('inv-item-card.index')->with(['success' => 'لقد تم اضافة البيانات بنجاح']);
         } catch (\Exception $ex) {
@@ -120,18 +121,25 @@ class InventoryItemCartController extends Controller
     {
         $data = get_cols_where_row(new InventoryItemCart(), array("*"), array("id" => $id));
         $com_code = auth()->user()->com_code;
-        $inv_itemcard_categories = get_cols_where(new InventoryItemCategory(), array('id', 'name'), array('com_code' => $com_code, 'active' => 1), 'id', 'DESC');
-        $inv_uoms_parent = get_cols_where(new InvUoms(), array('id', 'name'), array('com_code' => $com_code, 'active' => 1, 'is_master' => 1), 'id', 'DESC');
-        $inv_uoms_child = get_cols_where(new InvUoms(), array('id', 'name'), array('com_code' => $com_code, 'active' => 1, 'is_master' => 0), 'id', 'DESC');
-        $item_card_data = get_cols_where(new InventoryItemCart(), array('id', 'name'), array('com_code' => $com_code, 'active' => 1), 'id', 'DESC');
+        // return $data;
+        $inv_itemcard_categories = get_cols_where(new InventoryItemCategory(), array('id', 'name'), array('com_code' => $com_code, 'active' => 0), 'id', 'DESC');
+        $inv_uoms_parent = get_cols_where(new InvUoms(), array('id', 'name'), array('com_code' => $com_code, 'active' => 0, 'is_master' => 1), 'id', 'DESC');
+        $inv_uoms_child = get_cols_where(new InvUoms(), array('id', 'name'), array('com_code' => $com_code, 'active' => 0, 'is_master' => 0), 'id', 'DESC');
+        $item_card_data = get_cols_where(new InventoryItemCart(), array('id', 'name'), array('com_code' => $com_code, 'active' => 0), 'id', 'DESC');
         // $counterUsedin_with_suppliers = get_count_where(new Suppliers_with_orders_details(), array("com_code" => $com_code, "item_code" => $data['item_code']));
         // $counterUsedin_with_sales = get_count_where(new Sales_invoices_details(), array("com_code" => $com_code, "item_code" => $data['item_code']));
         // $counterUsedBefore = $counterUsedin_with_suppliers + $counterUsedin_with_sales;
-        return view('admin.inv_itemCard.edit', ['data' => $data, 'inv_itemcard_categories' => $inv_itemcard_categories, 'inv_uoms_parent' => $inv_uoms_parent, 'inv_uoms_child' => $inv_uoms_child, 'item_card_data' => $item_card_data, 'counterUsedBefore' => $counterUsedBefore]);
+        // return   $inv_itemcard_categories;
+        return view('admin.inv_item_card.edit', [
+            'data' => $data, 'inv_itemcard_categories' => $inv_itemcard_categories, 'inv_uoms_parent' => $inv_uoms_parent, 'inv_uoms_child' => $inv_uoms_child,
+            'item_card_data' => $item_card_data,
+            //  'counterUsedBefore' => $counterUsedBefore
+        ]);
     }
     public function update($id, ItemCardRequestUpdate $request)
     {
         try {
+            //bulk_
             $com_code = auth()->user()->com_code;
             $data = get_cols_where_row(new InventoryItemCart(), array("*"), array("id" => $id));
             if (empty($data)) {
@@ -153,18 +161,18 @@ class InventoryItemCartController extends Controller
                         ->with(['error' => 'من فضلك اختر  وحدة القياس الاب'])
                         ->withInput();
                 }
-                if ($request->does_has_retailunit == "") {
+                if ($request->does_has_retail_unit == "") {
                     return redirect()->back()
                         ->with(['error' => 'من فضلك اختر  هل للصنف وحدة تجزئة'])
                         ->withInput();
                 }
-                if ($request->does_has_retailunit == 1) {
+                if ($request->does_has_retail_unit == 1) {
                     if ($request->retail_uom_id == "") {
                         return redirect()->back()
                             ->with(['error' => 'من فضلك اختر  وحدة القياس التجزئة'])
                             ->withInput();
                     }
-                    if ($request->retail_uom_quntToParent == "" || $request->retail_uom_quntToParent == 0) {
+                    if ($request->retail_uom_qty_to_parent == "" || $request->retail_uom_qty_to_parent == 0) {
                         return redirect()->back()
                             ->with(['error' => 'من فضلك ادخل النسبة مابين وحدة قياس الاب  والابن'])
                             ->withInput();
@@ -173,7 +181,10 @@ class InventoryItemCartController extends Controller
             }
             //check if not exsits for barcode
             if ($request->barcode != '') {
-                $checkExists_barcode = InventoryItemCart::where(['barcode' => $request->barcode, 'com_code' => $com_code])->where("id", "!=", $id)->first();
+                $checkExists_barcode = InventoryItemCart::where([
+                    'barcode' => $request->barcode,
+                    'com_code' => $com_code
+                ])->where("id", "!=", $id)->first();
                 if (!empty($checkExists_barcode)) {
                     return redirect()->back()
                         ->with(['error' => 'عفوا باركود الصنف مسجل من قبل'])
@@ -183,7 +194,10 @@ class InventoryItemCartController extends Controller
                 }
             }
             //check if not exsits for name
-            $checkExists_barcode = InventoryItemCart::where(['name' => $request->name, 'com_code' => $com_code])->where("id", "!=", $id)->first();
+            $checkExists_barcode = InventoryItemCart::where([
+                'name' => $request->name,
+                'com_code' => $com_code
+            ])->where("id", "!=", $id)->first();
             if (!empty($checkExists_barcode)) {
                 return redirect()->back()
                     ->with(['error' => 'عفوا اسم الصنف مسجل من قبل'])
@@ -239,7 +253,7 @@ class InventoryItemCartController extends Controller
                 ->withInput();
         }
     }
-    public function delete($id)
+    public function destroy($id)
     {
         try {
             $com_code = auth()->user()->com_code;
@@ -248,7 +262,7 @@ class InventoryItemCartController extends Controller
                 $flag = delete(new InventoryItemCart(), array("id" => $id, 'com_code' => $com_code));
                 if ($flag) {
                     return redirect()->back()
-                        ->with(['success' => '   تم حذف البيانات بنجاح']);
+                        ->with(['error' => '   تم حذف البيانات بنجاح']);
                 } else {
                     return redirect()->back()
                         ->with(['error' => 'عفوا حدث خطأ ما']);
@@ -266,9 +280,11 @@ class InventoryItemCartController extends Controller
     {
         $data = get_cols_where_row(new InventoryItemCart(), array("*"), array("id" => $id));
         $com_code = auth()->user()->com_code;
+        // return $data;
         $data['added_by_admin'] = get_field_value(new Admin(), 'name', array('id' => $data['added_by']));
-        $data['inv_itemcard_categories_name'] = get_field_value(new InventoryItemCategory(), 'name', array('id' => $data['inv_itemcard_categories_id']));
-        $data['parent_item_name'] = get_field_value(new InventoryItemCart(), 'name', array('id' => $data['parent_inv_itemcard_id']));
+        $data['inv_itemcard_categories_name'] = get_field_value(new InventoryItemCategory(), 'name', array('id' => $data['inv_item_card_categories_id']));
+        $value = get_field_value(new InventoryItemCart(), 'name', array('id' => $data['parent_inv_item_card_id']));
+        // return $value;
         $data['Uom_name'] = get_field_value(new InvUoms(), 'name', array('id' => $data['uom_id']));
         if ($data['does_has_retail_unit'] == 1) {
             $data['retail_uom_name'] = get_field_value(new InvUoms(), 'name', array('id' => $data['retail_uom_id']));
@@ -276,17 +292,19 @@ class InventoryItemCartController extends Controller
         if ($data['updated_by'] > 0 and $data['updated_by']  != null) {
             $data['updated_by_admin'] = get_field_value(new Admin(), 'name', array('id' => $data['updated_by']));
         }
-        $inv_itemcard_movements_categories = get_cols(new Inv_itemcard_movements_categories(), array("*"), "id", "ASC");
-        $inv_itemcard_movements_types = get_cols(new Inv_itemcard_movements_types(), array("*"), "id", "ASC");
-        $stores = get_cols_where(new Store(), array("id", "name"), array("com_code" => $com_code), "id", "ASC");
-        return view('admin.inv_itemCard.show', ['data' => $data, 'inv_itemcard_movements_categories' => $inv_itemcard_movements_categories, 'inv_itemcard_movements_types' => $inv_itemcard_movements_types, 'stores' => $stores]);
+        // $inv_itemcard_movements_categories = get_cols(new Inv_itemcard_movements_categories(), array("*"), "id", "ASC");
+        // $inv_itemcard_movements_types = get_cols(new Inv_itemcard_movements_types(), array("*"), "id", "ASC");
+        // $stores = get_cols_where(new Store(), array("id", "name"), array("com_code" => $com_code), "id", "ASC");
+        return view('admin.inv_item_card.show', ['data' => $data]);
     }
     public function ajax_search(Request $request)
     {
+
+        //  return $request;
         if ($request->ajax()) {
             $search_by_text = $request->search_by_text;
             $item_type = $request->item_type;
-            $inv_itemcard_categories_id = $request->inv_itemcard_categories_id;
+            $inv_item_card_categories_id = $request->inv_item_card_categories_id;
             $searchbyradio = $request->searchbyradio;
             if ($item_type == 'all') {
                 $field1 = "id";
@@ -297,14 +315,14 @@ class InventoryItemCartController extends Controller
                 $operator1 = "=";
                 $value1 = $item_type;
             }
-            if ($inv_itemcard_categories_id == 'all') {
+            if ($inv_item_card_categories_id == 'all') {
                 $field2 = "id";
                 $operator2 = ">";
                 $value2 = 0;
             } else {
-                $field2 = "inv_itemcard_categories_id";
+                $field2 = "inv_item_card_categories_id";
                 $operator2 = "=";
-                $value2 = $inv_itemcard_categories_id;
+                $value2 = $inv_item_card_categories_id;
             }
             if ($search_by_text != '') {
                 if ($searchbyradio == 'barcode') {
@@ -326,12 +344,12 @@ class InventoryItemCartController extends Controller
                 $operator3 = ">";
                 $value3 = 0;
             }
-            $data = Inv_itemCard::where($field1, $operator1, $value1)->where($field2, $operator2, $value2)->where($field3, $operator3, $value3)->orderBy('id', 'DESC')->paginate(PAGINATION_COUNT);
+            $data = InventoryItemCart::where($field1, $operator1, $value1)->where($field2, $operator2, $value2)->where($field3, $operator3, $value3)->orderBy('id', 'DESC')->paginate(PAGINATION_COUNT);
             if (!empty($data)) {
                 foreach ($data as $info) {
                     $info->added_by_admin = get_field_value(new Admin(), 'name', array('id' => $info->added_by));
-                    $info->inv_itemcard_categories_name = get_field_value(new InventoryItemCategory(), 'name', array('id' => $info->inv_itemcard_categories_id));
-                    $info->parent_item_name = get_field_value(new InventoryItemCart(), 'name', array('id' => $info->parent_inv_itemcard_id));
+                    $info->inv_item_card_categories_name = get_field_value(new InventoryItemCategory(), 'name', array('id' => $info->inv_item_card_categories_id));
+                    $info->parent_item_name = get_field_value(new InventoryItemCart(), 'name', array('id' => $info->parent_inv_item_card_id));
                     $info->Uom_name = get_field_value(new InvUoms(), 'name', array('id' => $info->uom_id));
                     $info->retail_uom_name = get_field_value(new InvUoms(), 'name', array('id' => $info->retail_uom_id));
                     if ($info->updated_by > 0 and $info->updated_by != null) {
@@ -339,7 +357,8 @@ class InventoryItemCartController extends Controller
                     }
                 }
             }
-            return view('admin.inv_itemCard.ajax_search', ['data' => $data]);
+            // return $data;
+            return view('admin.inv_item_card.ajax_search', ['data' => $data]);
         }
     }
     public function ajax_search_movements(Request $request)

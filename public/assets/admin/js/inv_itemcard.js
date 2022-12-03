@@ -247,8 +247,8 @@ $(document).ready(function () {
             return false;
         }
 
-        var nos_gomla_price = $("#nos_bulk_price").val();
-        if (nos_gomla_price == "") {
+        var nos_bulk_price = $("#nos_bulk_price").val();
+        if (nos_bulk_price == "") {
             alert("من فضلك  ادخل السعر النص جملة للوحده الاب   ");
             $("#nos_bulk_price").focus();
             return false;
@@ -277,14 +277,14 @@ $(document).ready(function () {
                 return false;
             }
 
-            var nos_gomla_price_retail = $("#nos_bulk_price_retail").val();
-            if (nos_gomla_price_retail == "") {
+            var nos_bulk_price_retail = $("#nos_bulk_price_retail").val();
+            if (nos_bulk_price_retail == "") {
                 alert("من فضلك  ادخل السعر النص جملة للوحده التجزئة   ");
                 $("#nos_bulk_price_retail").focus();
                 return false;
             }
-            var gomla_price_retail = $("#bulk_price_retail").val();
-            if (gomla_price_retail == "") {
+            var bulk_price_retail = $("#bulk_price_retail").val();
+            if (bulk_price_retail == "") {
                 alert("من فضلك  ادخل السعر  الجملة للوحده التجزئة   ");
                 $("#bulk_price_retail").focus();
                 return false;
@@ -322,7 +322,7 @@ $(document).ready(function () {
 
     $(document).on(
         "change",
-        "#inv_itemcard_categories_id_search",
+        "#inv_item_card_categories_id_search",
         function (e) {
             make_search();
         }
@@ -335,8 +335,8 @@ $(document).ready(function () {
     function make_search() {
         var search_by_text = $("#search_by_text").val();
         var item_type = $("#item_type_search").val();
-        var inv_itemcard_categories_id = $(
-            "#inv_itemcard_categories_id_search"
+        var inv_item_card_categories_id = $(
+            "#inv_item_card_categories_id_search"
         ).val();
         var searchbyradio = $(
             "input[type=radio][name=searchbyradio]:checked"
@@ -352,7 +352,7 @@ $(document).ready(function () {
             data: {
                 search_by_text: search_by_text,
                 item_type: item_type,
-                inv_itemcard_categories_id: inv_itemcard_categories_id,
+                inv_item_card_categories_id: inv_item_card_categories_id,
                 _token: token_search,
                 searchbyradio: searchbyradio,
             },

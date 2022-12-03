@@ -29,9 +29,9 @@
       <div class="card">
         <div class="card-header">
           <h3 class="card-title card_title_center">بيانات   الاصناف</h3>
-          {{-- <input type="hidden" id="token_search" value="{{csrf_token() }}">
-          <input type="hidden" id="ajax_search_url" value="{{ route('inv-item-card.ajax_search') }}">
-         --}}
+          <input type="hidden" id="token_search" value="{{csrf_token() }}">
+          <input type="hidden" id="ajax_search_url" value="{{ route('admin.inv-item-card.ajax_search') }}">
+        
           <a href="{{ route('inv-item-card.create') }}" class="btn btn-sm btn-success" >اضافة جديد</a>
         </div>
         <!-- /.card-header -->
@@ -65,7 +65,7 @@
                           <div class="form-group"> 
                             <label>   بحث بفئة الصنف</label>
 
-                            <select name="inv_itemcard_categories_id_search" id="inv_itemcard_categories_id_search" class="form-control ">
+                            <select name="inv_item_card_categories_id_search" id="inv_item_card_categories_id_search" class="form-control ">
                            <option value="all"> بحث بالكل</option>
                               @if (@isset($inv_item_card_categories) && !@empty($inv_item_card_categories))
                              @foreach ($inv_item_card_categories as $info )
@@ -73,7 +73,7 @@
                              @endforeach
                               @endif
                             </select>
-                            @error('inv_itemcard_categories_id')
+                            @error('inv_item_card_categories_id_search')
                             <span class="text-danger">{{ $message }}</span>
                             @enderror
                             </div>
@@ -110,12 +110,21 @@
              <td>{{ $info->all_qty*1 }} {{ $info->Uom_name }}</td>  
 
 
-             <td>@if($info->active==1) مفعل @else معطل @endif</td> 
+             <td>@if($info->active==0) مفعل @else معطل @endif</td> 
       
          <td>
+         
+            <a href="{{ route('inv-item-card.edit',$info->id) }}" class="btn btn-sm  btn-primary">تعديل</a>   
+            <a href="{{ route('inv-item-card.show',$info->id) }}" class="btn btn-sm   btn-info">عرض</a>  
+            <form action="{{ route('inv-item-card.destroy',$info->id) }}" method="post" style=" display: inline-block;">
+              <input class="btn btn-sm   btn-danger" type="submit" value="حذف" />
+              @method('delete')
+              @csrf
+          </form>
+        
 
-        <a href="{{ route('inv-item-card.edit',$info->id) }}" class="btn btn-sm  btn-primary">تعديل</a>   
-        <a href="{{ route('inv-item-card.show',$info->id) }}" class="btn btn-sm   btn-info">عرض</a>   
+       
+ 
 
          </td>
            
