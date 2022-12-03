@@ -32,10 +32,13 @@
         <div class="card-body">
        
       
-      <form action="{{ route('inv-item-card.update',$data['id']) }}" method="post" enctype="multipart/form-data" >
+      <form action="{{ route('inv-item-card.update',$data['id']) }}"  method="POST" enctype="multipart/form-data" >
+      
         <div class="row">
         @csrf
-    <div class="col-md-6">    
+      
+
+        <div class="col-md-6">    
       <div class="form-group">
 <label>  باركود الصنف   </label>
 <input name="barcode" id="barcode" class="form-control" value="{{ old('name',$data['barcode']) }}" placeholder="ادخل  باركود الصنف"  >
@@ -56,12 +59,12 @@
 <div class="col-md-6"> 
 <div class="form-group"> 
   <label>  نوع الصنف</label>
-  {{-- <select  @if($counterUsedBefore>0) disabled  @endif name="item_type" id="item_type" class="form-control">
+  <select name="item_type" id="item_type" class="form-control">
    <option value="">اختر النوع</option> 
-  <option {{  old('item_type',$data['item_type'])==1 ? 'selected' : ''}}   value="1"> مخزني</option>
-  <option {{  old('item_type',$data['item_type'])==2 ? 'selected' : ''}}   value="2"> استهلاكي بتاريخ صلاحية</option>
-  <option {{  old('item_type',$data['item_type'])==3 ? 'selected' : ''}}   value="3"> عهدة</option>
-  </select> --}}
+  <option {{  old('item_type',$data['item_type'])==1 ? 'selected' : ''}}   value="1" > مخزني</option>
+  <option {{  old('item_type',$data['item_type'])==2 ? 'selected' : ''}}   value="2" > استهلاكي بتاريخ صلاحية</option>
+  <option {{  old('item_type',$data['item_type'])==3 ? 'selected' : ''}}   value="3" > عهدة</option>
+  </select>
 
   @error('item_type')
   <span class="text-danger">{{ $message }}</span>
@@ -76,11 +79,11 @@
       <option value="">اختر الفئة</option>
       @if (@isset($inv_itemcard_categories) && !@empty($inv_itemcard_categories))
      @foreach ($inv_itemcard_categories as $info )
-       <option {{  old('inv_itemcard_categories_id',$data['inv_itemcard_categories_id'])==$info->id ? 'selected' : ''}} value="{{ $info->id }}"> {{ $info->name }} </option>
+       <option {{  old('inv_item_card_categories_id',$data['inv_item_card_categories_id'])==$info->id ? 'selected' : ''}} value="{{ $info->id }}"> {{ $info->name }} </option>
      @endforeach
       @endif
     </select>
-    @error('inv_itemcard_categories_id')
+    @error('inv_item_card_categories_id')
     <span class="text-danger">{{ $message }}</span>
     @enderror
     </div>
@@ -88,11 +91,11 @@
   <div class="col-md-6"> 
     <div class="form-group"> 
       <label>   الصنف الاب له</label>
-      <select name="parent_inv_itemcard_id" id="parent_inv_itemcard_id" class="form-control ">
+      <select name="parent_inv_item_card_id" id="parent_inv_item_card_id" class="form-control ">
         <option selected value="0"> هو اب</option>
         @if (@isset($item_card_data) && !@empty($item_card_data))
        @foreach ($item_card_data as $info )
-         <option {{  old('parent_inv_itemcard_id',$data['parent_inv_itemcard_id'])==$info->id ? 'selected' : ''}} value="{{ $info->id }}"> {{ $info->name }} </option>
+         <option {{  old('parent_inv_item_card_id',$data['parent_inv_item_card_id'])==$info->id ? 'selected' : ''}} value="{{ $info->id }}"> {{ $info->name }} </option>
        @endforeach
         @endif
       </select>
@@ -104,14 +107,14 @@
   <div class="col-md-6"> 
     <div class="form-group"> 
       <label>   وحدة القياس الاب</label>
-      {{-- <select @if($counterUsedBefore>0) disabled  @endif  name="uom_id" id="uom_id" class="form-control ">
+      <select name="uom_id" id="uom_id" class="form-control ">
         <option value="">اختر الوحدة الاب</option>
         @if (@isset($inv_uoms_parent) && !@empty($inv_uoms_parent))
        @foreach ($inv_uoms_parent as $info )
          <option {{  old('uom_id',$data['uom_id'])==$info->id ? 'selected' : ''}} value="{{ $info->id }}"> {{ $info->name }} </option>
        @endforeach
         @endif
-      </select> --}}
+      </select>
       @error('uom_id')
       <span class="text-danger">{{ $message }}</span>
       @enderror
@@ -121,41 +124,41 @@
     <div class="col-md-6"> 
       <div class="form-group"> 
         <label>   هل للصنف وحدة تجزئة ابن</label>
-        {{-- <select @if($counterUsedBefore>0) disabled  @endif  name="does_has_retailunit" id="does_has_retailunit" class="form-control">
+        <select name="does_has_retail_unit" id="does_has_retail_unit" class="form-control">
          <option value="">اختر الحالة</option>
-        <option {{  old('does_has_retailunit',$data['does_has_retailunit'])==1 ? 'selected' : ''}} value="1"> نعم </option>
-        <option {{  old('does_has_retailunit',$data['does_has_retailunit'])==0 ? 'selected' : ''}} value="0"> لا</option>
-      </select> --}}
+        <option {{  old('does_has_retail_unit',$data['does_has_retail_unit'])==1 ? 'selected' : ''}} value="1"> نعم </option>
+        <option {{  old('does_has_retail_unit',$data['does_has_retail_unit'])==0 ? 'selected' : ''}} value="0"> لا</option>
+      </select>
       
-        @error('does_has_retailunit')
+        @error('does_has_retail_unit')
         <span class="text-danger">{{ $message }}</span>
         @enderror
         </div>
       </div>
 
 
-      <div class="col-md-6  " @if(old('does_has_retailunit',$data['does_has_retailunit'])!=1 ) style="display: none;" @endif  id="retail_uom_idDiv"> 
+      <div class="col-md-6  " @if(old('does_has_retail_unit',$data['does_has_retail_unit'])!=1 ) style="display: none;" @endif  id="retail_uom_idDiv"> 
         <div class="form-group"> 
           <label>   وحدة القياس التجزئة الابن بالنسبة للأب(<span class="parentuomname"></span>)</label>
-          {{-- <select @if($counterUsedBefore>0) disabled  @endif  name="retail_uom_id" id="retail_uom_id" class="form-control ">
+          <select  name="retail_uom_id" id="retail_uom_id" class="form-control ">
             <option value="">اختر الوحدة الاب</option>
             @if (@isset($inv_uoms_child) && !@empty($inv_uoms_child))
            @foreach ($inv_uoms_child as $info )
              <option {{  old('retail_uom_id',$data['retail_uom_id'])==$info->id ? 'selected' : ''}} value="{{ $info->id }}"> {{ $info->name }} </option>
            @endforeach
             @endif
-          </select> --}}
+          </select>
           @error('retail_uom_id')
           <span class="text-danger">{{ $message }}</span>
           @enderror
           </div>
         </div>
-        <div class="col-md-6 relatied_retial_counter "  @if(old('does_has_retailunit',$data['does_has_retailunit'])!=1 )  style="display: none;" @endif> 
+        <div class="col-md-6 relatied_retial_counter "  @if(old('does_has_retail_unit',$data['does_has_retail_unit'])!=1 )  style="display: none;" @endif> 
 
         <div class="form-group">
           <label>عدد وحدات التجزئة  (<span class="childuomname"></span>) بالنسبة للأب (<span class="parentuomname"></span>)  </label>
-          {{-- <input @if($counterUsedBefore>0) disabled  @endif  oninput="this.value=this.value.replace(/[^0-9.]/g,'');" name="retail_uom_quntToParent" id="retail_uom_quntToParent" class="form-control"  value="{{ old('retail_uom_quntToParent',$data['retail_uom_quntToParent']*1) }}" placeholder="ادخل  عدد وحدات التجزئة"  > --}}
-          @error('retail_uom_quntToParent')
+          <input  oninput="this.value=this.value.replace(/[^0-9.]/g,'');" name="retail_uom_qty_to_parent" id="retail_uom_qty_to_parent" class="form-control"  value="{{ old('retail_uom_quntToParent',$data['retail_uom_quntToParent']*1) }}" placeholder="ادخل  عدد وحدات التجزئة"  >
+          @error('retail_uom_qty_to_parent')
           <span class="text-danger">{{ $message }}</span>
           @enderror
           </div>
@@ -175,8 +178,8 @@
         <div class="col-md-6 relatied_parent_counter "  > 
           <div class="form-group">
             <label>سعر النص جملة بوحدة (<span class="parentuomname"></span>)  </label>
-            <input oninput="this.value=this.value.replace(/[^0-9.]/g,'');" name="nos_gomla_price" id="nos_gomla_price" class="form-control"  value="{{ old('nos_gomla_price',$data['nos_gomla_price']*1) }}" placeholder="ادخل السعر " >
-            @error('nos_gomla_price')
+            <input oninput="this.value=this.value.replace(/[^0-9.]/g,'');" name="nos_bulk_price" id="nos_bulk_price" class="form-control"  value="{{ old('nos_bulk_price',$data['nos_gomla_price']*1) }}" placeholder="ادخل السعر " >
+            @error('nos_bulk_price')
             <span class="text-danger">{{ $message }}</span>
             @enderror
             </div>
@@ -185,8 +188,8 @@
           <div class="col-md-6 relatied_parent_counter " > 
             <div class="form-group">
               <label>سعر  جملة بوحدة (<span class="parentuomname"></span>)  </label>
-              <input oninput="this.value=this.value.replace(/[^0-9.]/g,'');" name="gomla_price" id="gomla_price" class="form-control"  value="{{ old('gomla_price',$data['gomla_price']*1) }}" placeholder="ادخل السعر " >
-              @error('gomla_price')
+              <input oninput="this.value=this.value.replace(/[^0-9.]/g,'');" name="bulk_price" id="bulk_price" class="form-control"  value="{{ old('bulk_price',$data['bulk_price']*1) }}" placeholder="ادخل السعر " >
+              @error('bulk_price')
               <span class="text-danger">{{ $message }}</span>
               @enderror
               </div>
@@ -201,7 +204,7 @@
                 </div>
               </div>
 
-              <div class="col-md-6 relatied_retial_counter " @if(old('does_has_retailunit',$data['does_has_retailunit'])!=1 ) style="display: none;" @endif> 
+              <div class="col-md-6 relatied_retial_counter " @if(old('does_has_retail_unit',$data['does_has_retail_unit'])!=1 ) style="display: none;" @endif> 
 
                 <div class="form-group">
                   <label>سعر القطاعي بوحدة (<span class="childuomname"></span>)  </label>
@@ -211,28 +214,28 @@
                   @enderror
                   </div>
                 </div>
-                <div class="col-md-6 relatied_retial_counter " @if(old('does_has_retailunit',$data['does_has_retailunit'])!=1 ) style="display: none;" @endif> 
+                <div class="col-md-6 relatied_retial_counter " @if(old('does_has_retail_unit',$data['does_has_retail_unit'])!=1 ) style="display: none;" @endif> 
                   <div class="form-group">
                     <label>سعر النص جملة بوحدة (<span class="childuomname"></span>)  </label>
-                    <input oninput="this.value=this.value.replace(/[^0-9.]/g,'');" name="nos_gomla_price_retail" id="nos_gomla_price_retail" class="form-control"  value="{{ old('nos_gomla_price_retail',$data['nos_gomla_price_retail']*1) }}" placeholder="ادخل السعر " >
-                    @error('nos_gomla_price_retail')
+                    <input oninput="this.value=this.value.replace(/[^0-9.]/g,'');" name="nos_bulk_price_retail" id="nos_bulk_price_retail" class="form-control"  value="{{ old('nos_bulk_price_retail',$data['nos_bulk_price_retail']*1) }}" placeholder="ادخل السعر " >
+                    @error('nos_bulk_price_retail')
                     <span class="text-danger">{{ $message }}</span>
                     @enderror
                     </div>
                   </div>
   
-                  <div class="col-md-6 relatied_retial_counter " @if(old('does_has_retailunit',$data['does_has_retailunit'])!=1 ) style="display: none;" @endif> 
+                  <div class="col-md-6 relatied_retial_counter " @if(old('does_has_retail_unit',$data['does_has_retail_unit'])!=1 ) style="display: none;" @endif> 
                     <div class="form-group">
                       <label>سعر  الجملة بوحدة (<span class="childuomname"></span>)  </label>
-                      <input oninput="this.value=this.value.replace(/[^0-9.]/g,'');" name="gomla_price_retail" id="gomla_price_retail" class="form-control"  value="{{ old('gomla_price_retail',$data['gomla_price_retail']*1) }}" placeholder="ادخل السعر " >
-                      @error('gomla_price_retail')
+                      <input oninput="this.value=this.value.replace(/[^0-9.]/g,'');" name="bulk_price_retail" id="bulk_price_retail" class="form-control"  value="{{ old('bulk_price_retail',$data['bulk_price_retail']*1) }}" placeholder="ادخل السعر " >
+                      @error('bulk_price_retail')
                       <span class="text-danger">{{ $message }}</span>
                       @enderror
                       </div>
                     </div>
 
 
-                    <div class="col-md-6 relatied_retial_counter " @if(old('does_has_retailunit',$data['does_has_retailunit'])!=1 ) style="display: none;" @endif> 
+                    <div class="col-md-6 relatied_retial_counter " @if(old('does_has_retail_unit',$data['does_has_retail_unit'])!=1 ) style="display: none;" @endif> 
                       <div class="form-group">
                         <label>سعر  الشراء بوحدة (<span class="childuomname"></span>)  </label>
                         <input oninput="this.value=this.value.replace(/[^0-9.]/g,'');" name="cost_price_retail" id="cost_price_retail" class="form-control"  value="{{ old('cost_price_retail',$data['cost_price_retail']*1) }}" placeholder="ادخل السعر " >
@@ -274,26 +277,25 @@
       <div class="col-md-6" style="">
         <div class="form-group"> 
           <label>   صورة الصنف ان وجدت</label>
-  <img id="uploadedimg" src="#" alt="" style="width: 200px; width: 200px;" >        
+       <img id="uploadedimg" src="#" alt="" style="width: 150px; width: 150px;" >        
        <input onchange="readURL(this)" type="file" id="item_img" name="item_img" class="form-control">
+       <button type="button" class="btn btn-sm btn-danger" id="update_image">تغير الصورة</button>
+       <button type="button" class="btn btn-sm btn-danger" style="display: none;" id="cancel_update_image"> الغاء</button>
+       
           @error('active')
           <span class="text-danger">{{ $message }}</span>
           @enderror
           </div>
         </div>  
-<button type="button" class="btn btn-sm btn-danger" id="update_image">تغير الصورة</button>
-<button type="button" class="btn btn-sm btn-danger" style="display: none;" id="cancel_update_image"> الغاء</button>
+ <div class="col-md-6">
+  <div class="form-group">
+    <div id="oldimage">
+      <img class="custom_img" style="width: 200px; width: 200px;" src="{{ asset('assets/admin/uploads').'/'.$data['photo'] }}"  alt="لوجو الشركة">       
+    </div>  
+  </div>
+ </div>
 
 
- 
-      </div>
-<div id="oldimage">
-
-</div>
-
-
-      </div> 
-        </div>  
       <div class="col-md-12">
       <div class="form-group text-center">
         <button id="do_edit_item_cardd" type="submit" class="btn btn-primary btn-sm"> حفظ التعديلات</button>
@@ -302,7 +304,7 @@
       </div>
     </div>
     
-  </div>  
+  
             </form>  
         
             
