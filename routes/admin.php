@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Admin\AccountsController;
+use App\Http\Controllers\Admin\AccountsTypeController;
 use App\Http\Controllers\Admin\AdminSettingPanelController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\InventoryItemCartContorller;
@@ -10,6 +12,7 @@ use App\Http\Controllers\Admin\LoginController;
 use App\Http\Controllers\Admin\SalesMaterialTypeController;
 use App\Http\Controllers\Admin\StoresController;
 use App\Http\Controllers\Admin\TreasuriesController;
+use App\Models\AccountType;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -86,6 +89,19 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function () {
 
     /*         End inv item card 
 */
+    /*         start  account types              */
+    Route::get('/accountTypes/index', [AccountsTypeController::class, 'index'])->name('admin.accountTypes.index');
+    /*           end account types                */
+    /*         start  accounts                */
+    Route::get('/accounts/index', [AccountsController::class, 'index'])->name('admin.accounts.index');
+    Route::get('/accounts/create', [AccountsController::class, 'create'])->name('admin.accounts.create');
+    Route::post('/accounts/store', [AccountsController::class, 'store'])->name('admin.accounts.store');
+    Route::get('/accounts/edit/{id}', [AccountsController::class, 'edit'])->name('admin.accounts.edit');
+    Route::post('/accounts/update/{id}', [AccountsController::class, 'update'])->name('admin.accounts.update');
+    Route::post('/accounts/delete/{id}', [AccountsController::class, 'delete'])->name('admin.accounts.delete');
+    Route::post('/accounts/ajax_search', [AccountsController::class, 'ajax_search'])->name('admin.accounts.ajax_search');
+    Route::get('/accounts/show/{id}', [AccountsController::class, 'show'])->name('admin.accounts.show');
+    /*           end accounts                */
 });
 
 Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'middleware' => 'guest:admin'], function () {

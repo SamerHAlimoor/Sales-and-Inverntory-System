@@ -52,21 +52,21 @@
               </a>
               <ul class="nav nav-treeview">
                  <li class="nav-item">
-                    <a href="" class="nav-link ">
+                    <a href="{{route('admin.accountTypes.index')}}" class="nav-link {{ (request()->is('admin/accountTypes*') )?'active':'' }}">
                        <p>
                           انواع الحسابات المالية         
                        </p>
                     </a>
                  </li>
                  <li class="nav-item">
-                    <a href="" class="nav-link">
+                    <a href="{{ route('admin.accounts.index') }}" class="nav-link">
                        <p>
                           الشجرة ( الحسابات المالية )         
                        </p>
                     </a>
                  </li>
                  <li class="nav-item">
-                    <a href="" class="nav-link">
+                    <a href="" class="nav-link ">
                        <p>
                           حسابات العملاء         
                        </p>
