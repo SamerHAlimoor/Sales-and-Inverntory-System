@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\AccountsController;
 use App\Http\Controllers\Admin\AccountsTypeController;
 use App\Http\Controllers\Admin\AdminSettingPanelController;
+use App\Http\Controllers\Admin\CustomersController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\InventoryItemCartContorller;
 use App\Http\Controllers\Admin\InventoryItemCartController;
@@ -102,6 +103,17 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function () {
     Route::post('/accounts/ajax_search', [AccountsController::class, 'ajax_search'])->name('admin.accounts.ajax_search');
     Route::get('/accounts/show/{id}', [AccountsController::class, 'show'])->name('admin.accounts.show');
     /*           end accounts                */
+    /*         start  customer                */
+    Route::get('/customer/index', [CustomersController::class, 'index'])->name('admin.customer.index');
+    Route::get('/customer/create', [CustomersController::class, 'create'])->name('admin.customer.create');
+    Route::get('/customer/show', [CustomersController::class, 'show'])->name('admin.customer.show');
+    Route::post('/customer/store', [CustomersController::class, 'store'])->name('admin.customer.store');
+    Route::get('/customer/edit/{id}', [CustomersController::class, 'edit'])->name('admin.customer.edit');
+    Route::post('/customer/update/{id}', [CustomersController::class, 'update'])->name('admin.customer.update');
+    Route::get('/customer/delete/{id}', [CustomersController::class, 'delete'])->name('admin.customer.delete');
+    Route::post('/customer/ajax_search', [CustomersController::class, 'ajax_search'])->name('admin.customer.ajax_search');
+    Route::get('/customer/show/{id}', [CustomersController::class, 'show'])->name('admin.customer.show');
+    /*           end customer                */
 });
 
 Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'middleware' => 'guest:admin'], function () {

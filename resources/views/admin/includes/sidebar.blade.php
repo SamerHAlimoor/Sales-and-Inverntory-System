@@ -59,14 +59,14 @@
                     </a>
                  </li>
                  <li class="nav-item">
-                    <a href="{{ route('admin.accounts.index') }}" class="nav-link">
+                    <a href="{{ route('admin.accounts.index') }}" class="nav-link {{ (request()->is('admin/accounts*') )?'active':'' }}">
                        <p>
                           الشجرة ( الحسابات المالية )         
                        </p>
                     </a>
                  </li>
                  <li class="nav-item">
-                    <a href="" class="nav-link ">
+                    <a href="{{ route('admin.customer.index') }}" class="nav-link {{ (request()->is('admin/customer*') )?'active':'' }}">
                        <p>
                           حسابات العملاء         
                        </p>
