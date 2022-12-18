@@ -1,9 +1,8 @@
 <p align="center"><a href="https://laravel.com" target="_blank">
     
-    <img src="https://github.com/SamerHAlimoor/Sales-and-Inverntory-System/blob/first/home_page.png" width="400" alt="Home Page"></a></p>
 
 <p align="center">
-    <img src="https://github.com/SamerHAlimoor/Sales-and-Inverntory-System/blob/first/home_page.png" width="400" alt="Home Page"></a></p>
+    <img src="https://github.com/SamerHAlimoor/Sales-and-Inverntory-System/blob/first/home_page.png" width="100%" alt="Home Page"></a></p>
 
 </p>
 
