@@ -12,6 +12,7 @@ use App\Http\Controllers\Admin\InventoryUomController;
 use App\Http\Controllers\Admin\LoginController;
 use App\Http\Controllers\Admin\SalesMaterialTypeController;
 use App\Http\Controllers\Admin\StoresController;
+use App\Http\Controllers\Admin\SupplierCategoriesController;
 use App\Http\Controllers\Admin\TreasuriesController;
 use App\Models\AccountType;
 use Illuminate\Support\Facades\Route;
@@ -114,6 +115,14 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function () {
     Route::post('/customer/ajax_search', [CustomersController::class, 'ajax_search'])->name('admin.customer.ajax_search');
     Route::get('/customer/show/{id}', [CustomersController::class, 'show'])->name('admin.customer.show');
     /*           end customer                */
+    /*         start suppliers_categories                */
+    Route::get('/suppliers_categories/index', [SupplierCategoriesController::class, 'index'])->name('admin.suppliers_categories.index');
+    Route::get('/suppliers_categories/create', [SupplierCategoriesController::class, 'create'])->name('admin.suppliers_categories.create');
+    Route::post('/suppliers_categories/store', [SupplierCategoriesController::class, 'store'])->name('admin.suppliers_categories.store');
+    Route::get('/suppliers_categories/edit/{id}', [SupplierCategoriesController::class, 'edit'])->name('admin.suppliers_categories.edit');
+    Route::post('/suppliers_categories/update/{id}', [SupplierCategoriesController::class, 'update'])->name('admin.suppliers_categories.update');
+    Route::get('/suppliers_categories/delete/{id}', [SupplierCategoriesController::class, 'delete'])->name('admin.suppliers_categories.delete');
+    /*           end suppliers_categories                */
 });
 
 Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'middleware' => 'guest:admin'], function () {

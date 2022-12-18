@@ -80,7 +80,7 @@
                     </a>
                  </li>
                  <li class="nav-item">
-                    <a href="" class="nav-link {{ (request()->is('admin/suppliers_categories*') )?'active':'' }}">
+                    <a href="{{route('admin.suppliers_categories.index')}}" class="nav-link {{ (request()->is('admin/suppliers_categories*') )?'active':'' }}">
                        <p>
                           فئات الموردين         
                        </p>
