@@ -1,9 +1,12 @@
-<p align="center"><a href="https://laravel.com" target="_blank">
     
 
 <p align="center">
+## Home Page
     <img src="https://github.com/SamerHAlimoor/Sales-and-Inverntory-System/blob/first/home_page.png" width="100%" alt="Home Page"></a></p>
-
+</p>
+## Customer Page
+<p align="center">
+    <img src="https://github.com/SamerHAlimoor/Sales-and-Inverntory-System/blob/first/customer.png" width="100%" alt="Customer"></a></p>
 </p>
 
 ## About Laravel
