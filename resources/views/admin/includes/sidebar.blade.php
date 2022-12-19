@@ -87,7 +87,7 @@
                     </a>
                  </li>
                  <li class="nav-item">
-                    <a href="" class="nav-link {{ (request()->is('admin/supplier*') and !request()->is('admin/suppliers_categories*') )?'active':'' }}">
+                    <a href="{{route('admin.supplier.index')}}" class="nav-link {{ (request()->is('admin/supplier*') and !request()->is('admin/suppliers_categories*') )?'active':'' }}">
                        <p>
                           حسابات الموردين         
                        </p>
