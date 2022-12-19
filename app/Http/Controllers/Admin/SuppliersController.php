@@ -39,6 +39,7 @@ class SuppliersController extends Controller
     }
     public function store(SupplierRequest $request)
     {
+        // return $request;
         try {
             $com_code = auth()->user()->com_code;
             //check if not exsits for name
@@ -90,6 +91,7 @@ class SuppliersController extends Controller
             $data_insert['created_at'] = date("Y-m-d H:i:s");
             $data_insert['date'] = date("Y-m-d");
             $data_insert['com_code'] = $com_code;
+            // return $data_insert;
             $flag = insert(new Suppliers(), $data_insert);
             if ($flag) {
                 //insert into accounts  بتفح سجل ليه بالشجرة المحاسبية
