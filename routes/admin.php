@@ -14,6 +14,7 @@ use App\Http\Controllers\Admin\SalesMaterialTypeController;
 use App\Http\Controllers\Admin\StoresController;
 use App\Http\Controllers\Admin\SupplierCategoriesController;
 use App\Http\Controllers\Admin\SuppliersController;
+use App\Http\Controllers\Admin\SuppliersWithOrdersController;
 use App\Http\Controllers\Admin\TreasuriesController;
 use App\Models\AccountType;
 use Illuminate\Support\Facades\Route;
@@ -134,6 +135,28 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function () {
     Route::post('/supplier/ajax_search', [SuppliersController::class, 'ajax_search'])->name('admin.supplier.ajax_search');
     Route::get('/supplier/show/{id}', [SuppliersController::class, 'show'])->name('admin.supplier.show');
     /*           end suppliers                */
+    /*         start  suppliers_orders   المشتريات             */
+    Route::get('/suppliers_orders/index', [SuppliersWithOrdersController::class, 'index'])->name('admin.suppliers_orders.index');
+    Route::get('/suppliers_orders/create', [SuppliersWithOrdersController::class, 'create'])->name('admin.suppliers_orders.create');
+    Route::post('/suppliers_orders/store', [SuppliersWithOrdersController::class, 'store'])->name('admin.suppliers_orders.store');
+    Route::get('/suppliers_orders/edit/{id}', [SuppliersWithOrdersController::class, 'edit'])->name('admin.suppliers_orders.edit');
+    Route::post('/suppliers_orders/update/{id}', [SuppliersWithOrdersController::class, 'update'])->name('admin.suppliers_orders.update');
+    Route::get('/suppliers_orders/delete/{id}', [SuppliersWithOrdersController::class, 'delete'])->name('admin.suppliers_orders.delete');
+    Route::post('/suppliers_orders/ajax_search', [SuppliersWithOrdersController::class, 'ajax_search'])->name('admin.suppliers_orders.ajax_search');
+    Route::get('/suppliers_orders/show/{id}', [SuppliersWithOrdersController::class, 'show'])->name('admin.suppliers_orders.show');
+    Route::post('/suppliers_orders/get_item_uoms', [SuppliersWithOrdersController::class, 'get_item_uoms'])->name('admin.suppliers_orders.get_item_uoms');
+    Route::post('/suppliers_orders/load_modal_add_details', [SuppliersWithOrdersController::class, 'loadModelAndDetails'])->name('admin.suppliers_orders.load_modal_add_details');
+    Route::post('/suppliers_orders/add_new_details', [SuppliersWithOrdersController::class, 'addNewDetails'])->name('admin.suppliers_orders.add_new_details');
+    Route::post('/suppliers_orders/reload_items_details', [SuppliersWithOrdersController::class, 'reloadItemsDetails'])->name('admin.suppliers_orders.reload_items_details');
+    Route::post('/suppliers_orders/reload_parent_pill', [SuppliersWithOrdersController::class, 'reloadParentPill'])->name('admin.suppliers_orders.reload_parent_pill');
+    Route::post('/suppliers_orders/load_edit_item_details', [SuppliersWithOrdersController::class, 'loadEditItemDetails'])->name('admin.suppliers_orders.load_edit_item_details');
+    Route::post('/suppliers_orders/edit_item_details', [SuppliersWithOrdersController::class, 'editItemDetails'])->name('admin.suppliers_orders.edit_item_details');
+    Route::get('/suppliers_orders/delete_details/{id}/{id_parent}', [SuppliersWithOrdersController::class, 'delete_details'])->name('admin.suppliers_orders.delete_details');
+    Route::post('/suppliers_orders/do_approve/{id}', [SuppliersWithOrdersController::class, 'do_approve'])->name('admin.suppliers_orders.do_approve');
+    Route::post('/suppliers_orders/load_modal_approve_invoice', [SuppliersWithOrdersController::class, 'load_modal_approve_invoice'])->name('admin.suppliers_orders.load_modal_approve_invoice');
+    Route::post('/suppliers_orders/load_usershiftDiv', [SuppliersWithOrdersController::class, 'load_usershiftDiv'])->name('admin.suppliers_orders.load_usershiftDiv');
+    Route::get('/suppliers_orders/printsaleswina4/{id}/{size}', [SuppliersWithOrdersController::class, 'printsaleswina4'])->name('admin.suppliers_orders.printsaleswina4');
+    /*           end suppliers_orders               */
 });
 
 Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'middleware' => 'guest:admin'], function () {

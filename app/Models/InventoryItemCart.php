@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class InventoryItemCart extends Model
 {
     use HasFactory;
-    protected $table = "inventory_item_carts";
+    // protected $table = "inventory_item_carts";
 
     protected $fillable = [
         'item_type', 'name', 'inv_item_card_categories_id', 'parent_inv_item_card_id',
