@@ -170,7 +170,7 @@
               </a>
               <ul class="nav nav-treeview">
                  <li class="nav-item">
-                    <a href="" class="nav-link {{ (request()->is('admin/suppliers_orders*') and !request()->is('admin/suppliers_orders_general_return*') )?'active':'' }}">
+                    <a href="{{route('admin.suppliers_orders.index')}}" class="nav-link {{ (request()->is('admin/suppliers_orders*') and !request()->is('admin/suppliers_orders_general_return*') )?'active':'' }}">
                        <p>
                           فواتير المشتريات         
                        </p>
