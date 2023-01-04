@@ -271,7 +271,7 @@
               </a>
               <ul class="nav nav-treeview">
                  <li class="nav-item">
-                    <a href="" class="nav-link {{ (request()->is('admin/admins_accounts*') )?'active':'' }}">
+                    <a href="{{route('admin.admins_accounts.index')}}" class="nav-link {{ (request()->is('admin/admins_accounts*') )?'active':'' }}">
                        <p>
                           المستخدمين         
                        </p>

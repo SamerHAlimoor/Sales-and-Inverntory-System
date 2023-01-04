@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\AccountsController;
 use App\Http\Controllers\Admin\AccountsTypeController;
+use App\Http\Controllers\Admin\AdminsController;
 use App\Http\Controllers\Admin\AdminSettingPanelController;
 use App\Http\Controllers\Admin\CustomersController;
 use App\Http\Controllers\Admin\DashboardController;
@@ -157,6 +158,18 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function () {
     Route::post('/suppliers_orders/load_usershiftDiv', [SuppliersWithOrdersController::class, 'load_usershiftDiv'])->name('admin.suppliers_orders.load_usershiftDiv');
     Route::get('/suppliers_orders/printsaleswina4/{id}/{size}', [SuppliersWithOrdersController::class, 'printsaleswina4'])->name('admin.suppliers_orders.printsaleswina4');
     /*           end suppliers_orders               */
+    /*         start Admin Accounts                */
+    Route::get('/admins_accounts/index', [AdminsController::class, 'index'])->name('admin.admins_accounts.index');
+    Route::get('/admins_accounts/create', [AdminsController::class, 'create'])->name('admin.admins_accounts.create');
+    Route::post('/admins_accounts/store', [AdminsController::class, 'store'])->name('admin.admins_accounts.store');
+    Route::get('/admins_accounts/edit/{id}', [AdminsController::class, 'edit'])->name('admin.admins_accounts.edit');
+    Route::post('/admins_accounts/update/{id}', [AdminsController::class, 'update'])->name('admin.admins_accounts.update');
+    Route::post('/admins_accounts/ajax_search', [AdminsController::class, 'ajax_search'])->name('admin.admins_accounts.ajax_search');
+    Route::get('/admins_accounts/details/{id}', [AdminsController::class, 'details'])->name('admin.admins_accounts.details');
+    Route::get('/admins_accounts/Add_treasuries_delivery/{id}', [AdminsController::class, 'Add_treasuries_delivery'])->name('admin.admins_accounts.Add_treasuries_delivery');
+    Route::post('/admins_accounts/Add_treasuries_To_Admin/{id}', [AdminsController::class, 'Add_treasuries_To_Admin'])->name('admin.admins_accounts.Add_treasuries_To_Admin');
+    Route::get('/admins_accounts/delete_treasuries_delivery/{id}', [AdminsController::class, 'delete_treasuries_delivery'])->name('admin.admins_accounts.delete_treasuries_delivery');
+    /*           End Admin Accounts                */
 });
 
 Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'middleware' => 'guest:admin'], function () {
